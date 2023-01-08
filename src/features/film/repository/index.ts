@@ -9,18 +9,15 @@ import { ErrorData } from '@/types/error'
 export class FilmRepository implements FilmFactory {
   async find({ id }: Pick<Film, 'id'>): Promise<FilmData> {
     try {
-      const response: AxiosResponse<FilmData, ErrorData> = await axios.get(
-        `/api/films/${id}`,
-        {
+      const response: { data: AxiosResponse<FilmData, ErrorData> } =
+        await axios.get(`/api/films/${id}`, {
           headers: {
             'Content-Type': 'application/json',
           },
           method: 'get',
-        }
-      )
+        })
       const { data } = response
-      console.log(data)
-      return data
+      return data.data
     } catch (error: any) {
       if (isAxiosError(error)) {
         throw error
