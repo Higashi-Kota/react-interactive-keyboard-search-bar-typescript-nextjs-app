@@ -22,6 +22,7 @@ const NeatFetch = () => {
 
   const { data, error, refetch } = useNeatFetch({ page: pageNumber })
 
+  console.log(error)
   const handleRefresh = async (e: React.MouseEvent) => {
     queryClient.removeQueries([
       ISSUE_KEY,
